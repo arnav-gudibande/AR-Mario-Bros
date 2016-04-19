@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=inputData\ thetaAxisSize\ rAxisSize\ minContrast
+comment0.target=HoughTransform.ArrayData\ houghTransform(HoughTransform.ArrayData,\ int,\ int,\ int)
+comment1.params=filename
+comment1.target=HoughTransform.ArrayData\ getArrayDataFromImage(java.lang.String)
+comment2.params=filename\ arrayData
+comment2.target=void\ writeOutputImage(java.lang.String,\ HoughTransform.ArrayData)
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4
