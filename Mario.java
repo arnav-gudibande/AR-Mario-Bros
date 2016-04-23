@@ -65,7 +65,8 @@ public class Mario extends JComponent implements ActionListener
         if(x<=0) moveRight();
         if(x>=590) moveLeft();
         if(Engine.getColorPixel(x+5,y+5,Engine.edges)==255){
-            moveUp();
+            dx=0;
+            //dy=0;
         }
     }
 
