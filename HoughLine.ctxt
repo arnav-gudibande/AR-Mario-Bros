@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=theta\ r
-comment0.target=HoughLine(double,\ double)
-comment0.text=\ \n\ Initialises\ the\ hough\ line\ \n
-comment1.params=image\ color
-comment1.target=void\ draw(java.awt.image.BufferedImage,\ int)
-comment1.text=\ \n\ Draws\ the\ line\ on\ the\ image\ of\ your\ choice\ with\ the\ RGB\ colour\ of\ your\ choice.\ \n
-numComments=2
