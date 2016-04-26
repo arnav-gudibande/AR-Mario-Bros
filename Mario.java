@@ -22,19 +22,16 @@ import javax.swing.ImageIcon;
 public class Mario extends JComponent implements ActionListener
 {
     // instance variables - replace the example below with your own
-    public double dx=0, dy=0;
     public double x,y,d;
     Ellipse2D.Double ball;
     ImageIcon mario;
 
-    public Mario(int x, int y, int dx, int dy, int o, int d) throws IOException//the explicit parameters for the BAll constructor
+    public Mario(int x, int y, int o, int d) throws IOException//the explicit parameters for the BAll constructor
     {
         switch(o){//switch stamenment
             case 1:
                 this.x = x;
                 this.y = y;//sets all the instance field variables to whatever was specified
-                this.dx = dx;
-                this.dy = dy;
                 break;
         }
         this.d = d;//sets the dimensions of the ball
@@ -62,43 +59,53 @@ public class Mario extends JComponent implements ActionListener
     }
     
     public void move() throws IOException {
-        repaint();//repaints the frame and also adds to the speed that the ball
-        x+=dx;//speed is added to the dx
-        y+=dy;//speed is added to dy
-        if(y<=0) moveDown();//if any of the bounds are breached, then make the ball move accordingly
-        if(y>=380)moveUp();
-        if(x<=0) moveRight();
-        if(x>=590) moveLeft();
-        if(Engine.getColorPixel(x+17,y+54,Engine.edges)==255){
-            //dx=0;
-            //dy=0;
-            moveUp();
+        repaint();
+        //if(y<=0) moveDown();//if any of the bounds are breached, then make the ball move accordingly
+        //if(y>=380)moveUp();
+        //if(x<=0) moveRight();
+        //if(x>=590) moveLeft();
+        if(Engine.getColorPixel(x+17,y+54,Engine.edges)!=255){
+            moveDown();
         }
-        
-        if(Engine.b1.getX()==x && Engine.b1.getY()==y){
-            moveUp();
-        }
+            
+            for(int i = 0; i<=10; i++)
+            {
+                if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
+                    y+=i;
+                }
+            }
+            
+            for(int i = 0; i>=-10; i--)
+            {
+                if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
+                    y+=i;
+                }
+            }
     }
 
     public void moveUp()
     {
-        dy += -0.1;//make the dx go down to move up in the frame
+        y += -35;//make the dx go down to move up in the frame
     }
 
     public void moveDown()
     {
-        dy += 0.1;//to move up, vice versa
+        y += 0.1;//to move up, vice versa
     }
 
     public void moveLeft()
     {
-        dx += -0.1;//to move left, dx is subtracted from
+        //dx += -0.1;//to move left, dx is subtracted from
+        x-=5;
     }
 
     public void moveRight()
     {
-        dx += 0.1;//to move right, dx is added to 
+        //dx += 0.1;//to move right, dx is added to 
+            x+=5;
     }
+    
+
     
     
 }

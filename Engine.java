@@ -40,8 +40,8 @@ public class Engine {
         }
 
         CannyEdgeDetector detector = new CannyEdgeDetector();
-        detector.setLowThreshold(5.5f);
-        detector.setHighThreshold(5.75f);
+        detector.setLowThreshold(7.5f);
+        detector.setHighThreshold(7.75f);
 
         detector.setSourceImage(in);
         detector.process();
@@ -51,18 +51,18 @@ public class Engine {
         x.setSize(640,480);
         x.setResizable(false);
 
-        Mario s = new Mario(0,0,0,0,1,10);
+        Mario s = new Mario(0,0,1,10);
         c1 = new Coin(100,100);
         b1 = new Box(100,130);
 
-        Timer t = new Timer(3, s);
+        Timer t = new Timer(1, s);
         class bListener implements KeyListener {//new blistener class - implements the interface keylistener, therfore it needs to override three methods
             public void keyPressed(KeyEvent e) {
                 switch(e.getKeyCode()) {//using the getkeycode method on object e
                     case KeyEvent.VK_UP: s.moveUp();//if up arrow key, then it moves up
                     break;
-                    case KeyEvent.VK_DOWN: s.moveDown();//if down arrow key, then it moves down
-                    break;
+                    //case KeyEvent.VK_DOWN: s.moveDown();//if down arrow key, then it moves down
+                    //break;
                     case KeyEvent.VK_LEFT: s.moveLeft();//if left arrow key, .....
                     break;
                     case KeyEvent.VK_RIGHT: s.moveRight();//,..
