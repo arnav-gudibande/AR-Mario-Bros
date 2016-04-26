@@ -74,6 +74,10 @@ public class Mario extends JComponent implements ActionListener
             //dy=0;
             moveUp();
         }
+        
+        if(Engine.b1.getX()==x && Engine.b1.getY()==y){
+            moveUp();
+        }
     }
 
     public void moveUp()

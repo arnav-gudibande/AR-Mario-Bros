@@ -17,6 +17,8 @@ public class Engine {
     static BufferedImage edges = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
     static JPanel temp = new JPanel();
     static JFrame x;
+    static Coin c1;
+    static Box b1;
     public static void main(String[] args) throws IOException {
         BufferedImage in = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
 
@@ -50,7 +52,8 @@ public class Engine {
         x.setResizable(false);
 
         Mario s = new Mario(0,0,0,0,1,10);
-        Coin c1 = new Coin(100,100);
+        c1 = new Coin(100,100);
+        b1 = new Box(100,130);
 
         Timer t = new Timer(3, s);
         class bListener implements KeyListener {//new blistener class - implements the interface keylistener, therfore it needs to override three methods
@@ -80,6 +83,9 @@ public class Engine {
         t.start();
         
         x.add(c1);
+        x.setVisible(true);
+        
+        x.add(b1);
         x.setVisible(true);
         
         //
