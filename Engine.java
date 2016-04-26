@@ -71,14 +71,14 @@ public class Engine {
         }
 
         x.addKeyListener(new bListener());
+        
+        //
         x.add(s);
         x.setVisible(true);
         t.start();
+        
+        //
         x.add(new JLabel(new ImageIcon(edges)));
-        x.setVisible(true);
-        //temp.add(new JLabel(new ImageIcon(edges)));
-        //temp.setBackground(new Color(0,0,0,85));
-        //x.add(temp);
         x.setVisible(true);
         
         x.setDefaultCloseOperation(x.EXIT_ON_CLOSE);
