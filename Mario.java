@@ -66,10 +66,10 @@ public class Mario extends JComponent implements ActionListener
         x+=dx;//speed is added to the dx
         y+=dy;//speed is added to dy
         if(y<=0) moveDown();//if any of the bounds are breached, then make the ball move accordingly
-        if(y>=430)moveUp();
+        if(y>=380)moveUp();
         if(x<=0) moveRight();
         if(x>=590) moveLeft();
-        if(Engine.getColorPixel(x,y,Engine.edges)==255){
+        if(Engine.getColorPixel(x+17,y+54,Engine.edges)==255){
             //dx=0;
             //dy=0;
             moveUp();

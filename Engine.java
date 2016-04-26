@@ -16,6 +16,7 @@ public class Engine {
     
     static BufferedImage edges = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
     static JPanel temp = new JPanel();
+    static JFrame x;
     public static void main(String[] args) throws IOException {
         BufferedImage in = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
 
@@ -44,11 +45,12 @@ public class Engine {
         detector.process();
         edges = detector.getEdgesImage();
 
-        JFrame x = new JFrame("A.R. Mario Bros");
+        x = new JFrame("A.R. Mario Bros");
         x.setSize(640,480);
         x.setResizable(false);
 
         Mario s = new Mario(0,0,0,0,1,10);
+        Coin c1 = new Coin(100,100);
 
         Timer t = new Timer(3, s);
         class bListener implements KeyListener {//new blistener class - implements the interface keylistener, therfore it needs to override three methods
@@ -77,9 +79,18 @@ public class Engine {
         x.setVisible(true);
         t.start();
         
+        x.add(c1);
+        x.setVisible(true);
+        
         //
+        
+        
         x.add(new JLabel(new ImageIcon(edges)));
         x.setVisible(true);
+        
+        //
+        
+        
         
         x.setDefaultCloseOperation(x.EXIT_ON_CLOSE);
 
