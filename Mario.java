@@ -19,24 +19,26 @@ import java.awt.BasicStroke;
 import java.util.ArrayList;
 import java.util.Random;//imports all neccessary components
 import javax.swing.ImageIcon;
+
 public class Mario extends JComponent implements ActionListener
 {
     // instance variables - replace the example below with your own
     public double x,y,d;
     Ellipse2D.Double ball;
     ImageIcon mario;
+    boolean onLine;
 
     public Mario(int x, int y, int o, int d) throws IOException//the explicit parameters for the BAll constructor
     {
         switch(o){//switch stamenment
             case 1:
-                this.x = x;
-                this.y = y;//sets all the instance field variables to whatever was specified
-                break;
+            this.x = x;
+            this.y = y;//sets all the instance field variables to whatever was specified
+            break;
         }
         this.d = d;//sets the dimensions of the ball
         mario = new ImageIcon(this.getClass()
-                .getResource("mario.gif"));
+            .getResource("mario.gif"));
     }
 
     public void paintComponent(Graphics g)//necessary overriden method, the result of extending JFrame
@@ -57,7 +59,7 @@ public class Mario extends JComponent implements ActionListener
             bb.printStackTrace();
         }
     }
-    
+
     public void move() throws IOException {
         repaint();
         //if(y<=0) moveDown();//if any of the bounds are breached, then make the ball move accordingly
@@ -66,31 +68,37 @@ public class Mario extends JComponent implements ActionListener
         //if(x>=590) moveLeft();
         if(Engine.getColorPixel(x+17,y+54,Engine.edges)!=255){
             moveDown();
+            onLine = false;
         }
-            
-            for(int i = 0; i<=10; i++)
-            {
-                if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
-                    y+=i;
-                }
+
+        for(int i = 0; i<=10; i++)
+        {
+            if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
+                y+=i;
             }
-            
-            for(int i = 0; i>=-10; i--)
-            {
-                if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
-                    y+=i;
-                }
+        }
+
+        for(int i = 0; i>=-10; i--)
+        {
+            if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
+                y+=i;
             }
+        }
+        
+        for(int i=0; i<37; i++)
+        {
+            if(Engine.getColorPixel(x+i, y+54, Engine.edges)==255) onLine=true;
+        }
     }
 
     public void moveUp()
     {
-        y += -35;//make the dx go down to move up in the frame
+        if(onLine) y += -35;//make the dx go down to move up in the frame
     }
 
     public void moveDown()
     {
-        y += 0.1;//to move up, vice versa
+        y += 1;//to move up, vice versa
     }
 
     public void moveLeft()
@@ -102,10 +110,8 @@ public class Mario extends JComponent implements ActionListener
     public void moveRight()
     {
         //dx += 0.1;//to move right, dx is added to 
-            x+=5;
+        x+=5;
     }
-    
 
-    
     
 }
