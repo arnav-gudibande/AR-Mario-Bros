@@ -98,7 +98,7 @@ public class Mario extends JComponent implements ActionListener
 
     public void moveDown()
     {
-        y += .1;//to move up, vice versa
+        y += 1;//to move up, vice versa
     }
 
     public void moveLeft()

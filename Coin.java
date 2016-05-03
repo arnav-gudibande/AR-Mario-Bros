@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 public class Coin extends JComponent implements ActionListener
 {
     ImageIcon cx;
-    int x;
-    int y;
+    double x;
+    double y;
     
     public Coin(int x, int y){
         cx = new ImageIcon(this.getClass()
@@ -36,7 +36,7 @@ public class Coin extends JComponent implements ActionListener
     
     public void move() throws IOException {
         repaint();
-        if(Engine.getColorPixel(x+10,y+10,Engine.edges)!=255) {
+        if(Engine.getColorPixel(x+10,y+25,Engine.edges)!=255) {
             y+=1;
         }
     }
