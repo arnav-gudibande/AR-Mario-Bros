@@ -1,4 +1,4 @@
-AR Java Game
+AR Mario Bros. Game -- Final Project CS I
 
 
-Made by Arnav Gudibande and Aditya Shanmugam
+Coded by Arnav Gudibande and Aditya Shanmugam
