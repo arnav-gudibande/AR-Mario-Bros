@@ -71,14 +71,14 @@ public class Mario extends JComponent implements ActionListener
             onLine = false;
         }
 
-        for(int i = 0; i<=10; i++)
+        for(int i = 0; i<=15; i++)
         {
             if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
                 y+=i;
             }
         }
 
-        for(int i = 0; i>=-10; i--)
+        for(int i = 0; i>=-15; i--)
         {
             if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
                 y+=i;
@@ -93,12 +93,12 @@ public class Mario extends JComponent implements ActionListener
 
     public void moveUp()
     {
-        if(onLine) y += -35;//make the dx go down to move up in the frame
+        if(true) y += -35;//make the dx go down to move up in the frame
     }
 
     public void moveDown()
     {
-        y += 1;//to move up, vice versa
+        y += .1;//to move up, vice versa
     }
 
     public void moveLeft()

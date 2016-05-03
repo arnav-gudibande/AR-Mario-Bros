@@ -1,6 +1,10 @@
 #BlueJ class context
 comment0.params=x\ y
 comment0.target=Coin(int,\ int)
-comment1.params=g
-comment1.target=void\ paintComponent(java.awt.Graphics)
-numComments=2
+comment1.params=e
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=
+comment3.target=void\ move()
+numComments=4

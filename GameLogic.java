@@ -1,33 +1,19 @@
+import java.awt.*;
+import javax.swing.*;
+import java.io.*;
 
-/**
- * Write a description of class GameLogic here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class GameLogic
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class GameLogic
-     */
-    public GameLogic()
+    public Mario s;
+    public Coin c1;
+    public Box b1;
+    public Grumpy g1;
+    
+    public GameLogic() throws IOException
     {
-        // initialise instance variables
-        x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+        s = new Mario(0,0,1,10);
+        c1 = new Coin(100,20);
+        b1 = new Box(200,130);
+        g1 = new Grumpy(100,100);
     }
 }
