@@ -14,6 +14,9 @@ Additionally, you must have a built-in webcam in order for the project to work.
 ![alt tag](https://raw.githubusercontent.com/arnav-gudibande/AR-Mario-Bros/master/video.gif)
 
 
+Made by Arnav Gudibande and Adithya Shanmugam for CS I Final Project
+
+
 
 
 
