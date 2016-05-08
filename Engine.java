@@ -11,7 +11,6 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
-
 public class Engine {
     static BufferedImage edges = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
     static JPanel temp = new JPanel();
@@ -20,10 +19,12 @@ public class Engine {
     static Box b1;
 
     public static void main(String[] args) throws Exception {
+        System.out.println("Initializing Webcam..."); 
         BufferedImage in = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
         Webcam webcam = Webcam.getDefault();
         webcam.setViewSize(new Dimension(640, 480));
         webcam.open();
+        System.out.println("Taking picture..."); 
         BufferedImage image = webcam.getImage();
         ImageIO.write(image, "JPG", new File("cx.jpg"));
         webcam.close();
@@ -35,6 +36,7 @@ public class Engine {
             e.printStackTrace(); 
         }
 
+        System.out.println("Running Edge Detection Algorithm");
         CannyEdgeDetector detector = new CannyEdgeDetector();
         detector.setLowThreshold(7.5f);
         detector.setHighThreshold(7.75f);
@@ -95,6 +97,8 @@ public class Engine {
         x.add(gL.g1);
         g.start();
         x.setVisible(true);
+
+        System.out.println("Game Ready");
 
         //
         x.add(new JLabel(new ImageIcon(edges)));

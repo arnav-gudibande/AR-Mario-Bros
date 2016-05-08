@@ -36,9 +36,17 @@ public class Coin extends JComponent implements ActionListener
     
     public void move() throws IOException {
         repaint();
-        if(Engine.getColorPixel(x+10,y+25,Engine.edges)!=255 && (y<460)) {
+        if(Engine.getColorPixel(x+10,y+25,Engine.edges)!=255 && (y<450)) {
             y+=1.75;
         }
+    }
+    
+    public double getXX(){
+        return (double) x;
+    }
+    
+    public double getYY(){
+        return (double) y;
     }
 }
 

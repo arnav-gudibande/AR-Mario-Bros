@@ -19,6 +19,9 @@ import java.awt.BasicStroke;
 import java.util.ArrayList;
 import java.util.Random;//imports all neccessary components
 import javax.swing.ImageIcon;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Mario extends JComponent implements ActionListener
 {
@@ -62,10 +65,7 @@ public class Mario extends JComponent implements ActionListener
 
     public void move() throws IOException {
         repaint();
-        //if(y<=0) moveDown();//if any of the bounds are breached, then make the ball move accordingly
-        //if(y>=380)moveUp();
-        //if(x<=0) moveRight();
-        //if(x>=590) moveLeft();
+
         if(Engine.getColorPixel(x+17,y+54,Engine.edges)!=255){
             moveDown();
             onLine = false;
@@ -84,10 +84,19 @@ public class Mario extends JComponent implements ActionListener
                 y+=i;
             }
         }
-        
+
         for(int i=0; i<37; i++)
         {
             if(Engine.getColorPixel(x+i, y+54, Engine.edges)==255) onLine=true;
+        }
+
+        for(int i=0; i<GameLogic.aC.size(); i++)
+        {
+            if(((x>=(GameLogic.aC.get(i).getXX())-15) && (x<=(GameLogic.aC.get(i).getXX())-5)) && ((y>=(GameLogic.aC.get(i).getYY())-35) && (y<=(GameLogic.aC.get(i).getYY())-25))) {
+                GameLogic.aC.get(i).setVisible(false);
+                GameLogic.aC.remove(i);
+                playNoise();
+            }
         }
     }
 
@@ -113,5 +122,17 @@ public class Mario extends JComponent implements ActionListener
         x+=5;
     }
 
-    
+    public void playNoise(){
+        try{
+            AudioInputStream audioInputStream =
+                AudioSystem.getAudioInputStream(
+                    this.getClass().getResource("cnoise.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }
+        catch(Exception ex)
+        {
+        }
+    }
 }
