@@ -1,0 +1,6 @@
+{
+  "name": "Augmented Reality Mario Bros.",
+  "tagline": "AR Mario Bros",
+  "body": "# AR. Mario Bros.\r\n\r\nThis project overlays Mario Bros on an image taken by your webcam\r\n\r\n### Usage\r\nTo run this project on your computer, you must download [this] (http://www.java2s.com/Code/JarDownload/webcam/webcam-capture-0.3.3.jar.zip) and add it to the \"libraries\" in your development environment.\r\nAdditionally, you must have a built-in webcam in order for the project to work.\r\n\r\n\r\n### Libraries Used\r\n  * Sarxos Webcam\r\n  * Canny Edge Detection\r\n\r\n![alt tag](https://raw.githubusercontent.com/arnav-gudibande/AR-Mario-Bros/master/video.gif)\r\n\r\n\r\nMade by [@arnav-gudibande] (https://github.com/arnav-gudibande) and [@d2shan] (https://github.com/d2shan) for CS I Final Project\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
