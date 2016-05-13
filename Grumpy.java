@@ -10,76 +10,105 @@ public class Grumpy extends JComponent implements ActionListener
     ImageIcon bx;
     int x;
     int y;
-    
+    double rNum = Math.random();
+    int dx;
+    boolean onLine = false;
+    int constx;
+    int counttt = 0;
+    int init = 0;
+
     public Grumpy(int x, int y){
         bx = new ImageIcon(this.getClass()
-                .getResource("grumpy.gif"));
+            .getResource("grumpy.gif"));
         this.x = x;
         this.y = y;
+        System.out.println(rNum);
+        if(rNum < .5) dx = 1;
+        else dx = -1;
     }
-    
-    public void paintComponent(Graphics g)//necessary overriden method, the result of extending JFrame
+
+    public void paintComponent(Graphics g)
     {
-        Graphics2D g2 = (Graphics2D) g;//creates a new Graphics2D object, and casts it b/c u are going from higher to lower dependency
+        Graphics2D g2 = (Graphics2D) g;
         int realx = (int) x;
         int realy = (int) y;
         bx.paintIcon(this, g2, realx, realy);
     }
-    
-    public int getX(){
-        return x;
-    }
-    
-    public int getY(){
-        return y;
-    }
-    
+
     public void actionPerformed(ActionEvent e)
     {
         try{
-            drop();
+            move();
         } catch(IOException bb){
             bb.printStackTrace();
         }
     }
-    
-    public void drop() throws IOException {
+
+    public void move() throws IOException {
         repaint();
-        if(Engine.getColorPixel(x+10,y+25,Engine.edges)!=255 && (y<460)) {
-            y+=1.75;
-        } 
+        if(onLine) {
+            counttt++;
+            if(counttt==1){init = x;}
+            patrol();
+        }
+
+        if(Engine.getColorPixel(x+17,y+54,Engine.edges)!=255){
+            moveDown();
+            onLine = false;
+        }
+
+        for(int i=0; i<37; i++)
+        {
+            if(Engine.getColorPixel(x+i, y+54, Engine.edges)==255) onLine=true;
+        }
         
     }
-    
+
     public void patrol() throws IOException {
-        repaint();
+        x += dx;
+        
+        if(Math.abs(init-x)>=50){
+            dx = -1 * dx;
+            init = x;
+        }        
+
         for(int i = 0; i<=15; i++)
         {
-            if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
-                moveLeft();
+            if(Engine.getColorPixel(x+(16/2)+dx, y+24+i, Engine.edges)==255){
                 y+=i;
             }
         }
 
         for(int i = 0; i>=-15; i--)
         {
-            if(Engine.getColorPixel(x+(36/2)+1, y+54+i, Engine.edges)==255){
-                moveLeft();
+            if(Engine.getColorPixel(x+(16/2)+dx, y+24+i, Engine.edges)==255){
                 y+=i;
             }
         }
+
     }
-    
+
     public void moveLeft()
     {
-        //dx += -0.1;//to move left, dx is subtracted from
-        x-=5;
+        x-=1;
     }
 
     public void moveRight()
     {
-        //dx += 0.1;//to move right, dx is added to 
-        x+=5;
+        x+=1;
+    }
+
+    public void moveDown()
+    {
+        y+=1;
+    }
+
+    public double getXX(){
+        return (double) x;
+    }
+
+    public double getYY(){
+        return (double) y;
     }
 }
 

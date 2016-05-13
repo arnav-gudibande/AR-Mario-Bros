@@ -16,9 +16,9 @@ public class Box extends JComponent
         this.y = y;
     }
     
-    public void paintComponent(Graphics g)//necessary overriden method, the result of extending JFrame
+    public void paintComponent(Graphics g)
     {
-        Graphics2D g2 = (Graphics2D) g;//creates a new Graphics2D object, and casts it b/c u are going from higher to lower dependency
+        Graphics2D g2 = (Graphics2D) g;
         int realx = (int) x;
         int realy = (int) y;
         bx.paintIcon(this, g2, realx, realy);

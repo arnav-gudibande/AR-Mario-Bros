@@ -20,15 +20,15 @@ public class Coin extends JComponent implements ActionListener
     
     public void actionPerformed(ActionEvent e){
         try{
-            move();//when the timer calls itself, move the ball
+            move();
         } catch(IOException bb){
             bb.printStackTrace();
         }
     }
     
-    public void paintComponent(Graphics g)//necessary overriden method, the result of extending JFrame
+    public void paintComponent(Graphics g)
     {
-        Graphics2D g2 = (Graphics2D) g;//creates a new Graphics2D object, and casts it b/c u are going from higher to lower dependency
+        Graphics2D g2 = (Graphics2D) g;
         int realx = (int) x;
         int realy = (int) y;
         cx.paintIcon(this, g2, realx, realy);

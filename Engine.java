@@ -17,8 +17,10 @@ public class Engine {
     static JFrame x;
     static Coin c1;
     static Box b1;
+    //static boolean spacePressed, rightPressed, leftPressed = false;
 
     public static void main(String[] args) throws Exception {
+        System.out.print('\u000C');
         System.out.println("Initializing Webcam..."); 
         BufferedImage in = new BufferedImage(640, 480, BufferedImage.TYPE_INT_ARGB);
         Webcam webcam = Webcam.getDefault();
@@ -40,7 +42,6 @@ public class Engine {
         CannyEdgeDetector detector = new CannyEdgeDetector();
         detector.setLowThreshold(7.5f);
         detector.setHighThreshold(7.75f);
-
         detector.setSourceImage(in);
         detector.process();
         edges = detector.getEdgesImage();
@@ -50,14 +51,13 @@ public class Engine {
         x.setResizable(false);
 
         GameLogic gL = new GameLogic();
-
         Timer t = new Timer(1, gL.s);
         Timer g = new Timer(1, gL.g1);
 
         class bListener implements KeyListener {//new blistener class - implements the interface keylistener, therfore it needs to override three methods
             public void keyPressed(KeyEvent e) {
                 switch(e.getKeyCode()) {//using the getkeycode method on object e
-                    case KeyEvent.VK_UP: gL.s.moveUp();//if up arrow key, then it moves up
+                    case KeyEvent.VK_SPACE: gL.s.moveUp();//if up arrow key, then it moves up
                     break;
                     //case KeyEvent.VK_DOWN: s.moveDown();//if down arrow key, then it moves down
                     //break;
@@ -69,43 +69,50 @@ public class Engine {
                 }
             }
 
-            public void keyReleased(KeyEvent e){}//overriding two methods, needs to be done if you implement an interface
+            public void keyReleased(KeyEvent e){
+                switch(e.getKeyCode()) {//using the getkeycode method on object e
+                    case KeyEvent.VK_LEFT: gL.s.stop();//if left arrow key, .....
+                    break;
+                    case KeyEvent.VK_RIGHT: gL.s.stop();//,..
+                    break;
+                    default: break;
+                }
+                
+            }//overriding two methods, needs to be done if you implement an interface
             public void keyTyped(KeyEvent e){}
         }
-
+        
         x.addKeyListener(new bListener());
-
-        //
+        
         x.add(gL.s);
         x.setVisible(true);
         t.start();
-
-        //x.add(gL.c1);
-        //x.setVisible(true);
-        //c.start();
-
+        
         for(int i=0; i<gL.aC.size(); i++){
             x.add(gL.aC.get(i));
             x.setVisible(true);
             Timer c = new Timer(1, gL.aC.get(i));
             c.start();
         }
-
+        
         x.add(gL.b1);
         x.setVisible(true);
-
-        x.add(gL.g1);
-        g.start();
-        x.setVisible(true);
-
+        
+        for(int i=0; i<gL.gC.size(); i++){
+            x.add(gL.gC.get(i));
+            x.setVisible(true);
+            Timer d = new Timer(1, gL.gC.get(i));
+            d.start();
+        }
+        
+        //x.add(gL.g1);
+        //g.start();
+        //x.setVisible(true);
+        
         System.out.println("Game Ready");
-
-        //
         x.add(new JLabel(new ImageIcon(edges)));
         x.setVisible(true);
-        //
         x.setDefaultCloseOperation(x.EXIT_ON_CLOSE);
-
     }
 
     public static int getColorPixel(double x, double y, BufferedImage image) throws IOException {
