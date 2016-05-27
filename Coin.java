@@ -36,7 +36,7 @@ public class Coin extends JComponent implements ActionListener
     
     public void move() throws IOException {
         repaint();
-        if(Engine.getColorPixel(x+10,y+25,Engine.edges)!=255 && (y<450)) {
+        if(Engine.getColorPixel(x+10,y+25,Engine.edges)!=255 && (y<450)) {//increments y coord until coin either reaches a white pixel of the bottom of the frame
             y+=1.75;
         }
     }
@@ -49,4 +49,3 @@ public class Coin extends JComponent implements ActionListener
         return (double) y;
     }
 }
-

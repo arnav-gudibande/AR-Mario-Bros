@@ -20,6 +20,7 @@ public class Engine {
     static JPanel score = new JPanel();
     static Timer t;//timer for the grumpy's and the coins
     static Timer g;
+    
     /*
      * The Engine class initializes the Webcam, spawns characters for the game and runs the algorithm to detect the edges on an image
      * Depending on the speed of the CPU's processor, the speed of the game may vary
@@ -47,13 +48,13 @@ public class Engine {
 
         System.out.println("Running Edge Detection Algorithm");//algorithm that detects the edges on an image
         CannyEdgeDetector detector = new CannyEdgeDetector();//canny edge detector instance creation
-        detector.setLowThreshold(7.5f);//sets the thresholds (how detailed 
+        detector.setLowThreshold(7.5f);//sets the thresholds (how detailed the image is) 
         detector.setHighThreshold(7.75f);
-        detector.setSourceImage(in);
-        detector.process();
-        edges = detector.getEdgesImage();
+        detector.setSourceImage(in);//sets the source for the canny edge detector to the "in" buffered image
+        detector.process();//runs the process of rendering the new image
+        edges = detector.getEdgesImage();//sets the new image to another BufferedImage called edges
 
-        x = new JFrame("A.R. Mario Bros");
+        x = new JFrame("A.R. Mario Bros");//initalizes the JFrame
         x.setSize(640,480);
         x.setResizable(false);
         x.setLayout(new BorderLayout());
@@ -61,17 +62,15 @@ public class Engine {
         x.setVisible(true);
         
         
-        GameLogic gL = new GameLogic();
+        GameLogic gL = new GameLogic();//calls the GameLogic class and instantiates with an object
         t = new Timer(1, gL.s);
-        g = new Timer(1, gL.g1);
+        g = new Timer(1, gL.g1);//the timers update every 1ms
 
         class bListener implements KeyListener {//new blistener class - implements the interface keylistener, therfore it needs to override three methods
             public void keyPressed(KeyEvent e) {
                 switch(e.getKeyCode()) {//using the getkeycode method on object e
                     case KeyEvent.VK_SPACE: gL.s.moveUp();//if up arrow key, then it moves up
                     break;
-                    //case KeyEvent.VK_DOWN: s.moveDown();//if down arrow key, then it moves down
-                    //break;
                     case KeyEvent.VK_LEFT: gL.s.moveLeft();//if left arrow key, .....
                     break;
                     case KeyEvent.VK_RIGHT: gL.s.moveRight();//,..
@@ -93,38 +92,38 @@ public class Engine {
             public void keyTyped(KeyEvent e){}
         }
         
-        x.addKeyListener(new bListener());
+        x.addKeyListener(new bListener());//adds the keylistener to the jframe
         
         x.add(gL.s);
         x.setVisible(true);
-        t.start();
+        t.start();//adds components of the game to the jframe
         
-        for(int i=0; i<gL.aC.size(); i++){
+        for(int i=0; i<gL.aC.size(); i++){//uses a for loop to add coins to the jframe
             x.add(gL.aC.get(i));
             x.setVisible(true);
             Timer c = new Timer(1, gL.aC.get(i));
-            c.start();
+            c.start();//the coins fall down until they hit a surface
         }
         
         
-        for(int i=0; i<gL.gC.size(); i++){
+        for(int i=0; i<gL.gC.size(); i++){//does the same thing for the grumpy's
             x.add(gL.gC.get(i));
             x.setVisible(true);
             Timer d = new Timer(1, gL.gC.get(i));
             d.start();
         }
         
-        Timer sco = new Timer(1000, new ActionListener(){
+        Timer sco = new Timer(1000, new ActionListener(){//adds a timer to the score jframe, it updates every second with the latest score
             public void actionPerformed(ActionEvent e){
                 String xc = Integer.toString(GameLogic.score);
-                counter.setText("Score: "+xc);
+                counter.setText("Score: "+xc);//concatenates the score to the jlabel
             }
         });
         
-        sco.start();
+        sco.start();//starts the score timer
         
         System.out.println("Game Ready");
-        x.add(new JLabel(new ImageIcon(edges)));
+        x.add(new JLabel(new ImageIcon(edges)));//adds the rendered image to the jframe
         x.setVisible(true);
         x.setDefaultCloseOperation(x.EXIT_ON_CLOSE);
     }
@@ -132,8 +131,8 @@ public class Engine {
     public static int getColorPixel(double x, double y, BufferedImage image) throws IOException {
         int xx = (int) x;
         int yy = (int) y;
-        int clr =  image.getRGB(xx,yy); 
-        int  blue  =  clr & 0x000000ff;
+        int clr =  image.getRGB(xx,yy);//method for detecting what the color a pixel is on a bufferedImage, used by the mario class 
+        int  blue  =  clr & 0x000000ff;//if the blue pixel's rgb value is 255, then I automatically know that it has to be a white pixel -- therefore mario must be on a line
         return blue;
     }
 }

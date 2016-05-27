@@ -22,7 +22,6 @@ public class Grumpy extends JComponent implements ActionListener
             .getResource("grumpy.gif"));
         this.x = x;
         this.y = y;
-        System.out.println(rNum);
         if(rNum < .5) dx = 1;
         else dx = -1;
     }
@@ -48,18 +47,18 @@ public class Grumpy extends JComponent implements ActionListener
         repaint();
         if(onLine) {
             counttt++;
-            if(counttt==1){init = x;}
-            patrol();
+            if(counttt==1){init = x;}//checks for first time goomba hits the line
+            patrol();//calls patrol method inside goomba class
         }
 
-        if(Engine.getColorPixel(x+17,y+54,Engine.edges)!=255){
-            moveDown();
-            onLine = false;
+        if(Engine.getColorPixel(x+17,y+54,Engine.edges)!=255){//if current pixel for the grumpy is not a white pixel
+            moveDown();//invokes moveDown method
+            onLine = false;//assigns false value to onLine
         }
 
         for(int i=0; i<37; i++)
         {
-            if(Engine.getColorPixel(x+i, y+54, Engine.edges)==255) onLine=true;
+            if(Engine.getColorPixel(x+i, y+54, Engine.edges)==255) onLine=true;//if current pixel for grumy is a white pixel, assigns true value for onLine
         }
         
     }
@@ -67,12 +66,12 @@ public class Grumpy extends JComponent implements ActionListener
     public void patrol() throws IOException {
         x += dx;
         
-        if(Math.abs(init-x)>=50){
-            dx = -1 * dx;
-            init = x;
+        if(Math.abs(init-x)>=50){//init was assigned using the counttt variable in the move method, was first initialized when grumpy first hits line
+            dx = -1 * dx;//changes direction that the rumy will move in
+            init = x;//resets init to x value when direction changed
         }        
 
-        for(int i = 0; i<=15; i++)
+        for(int i = 0; i<=15; i++)//allows grumpys to go up and down slopes, similar to Mario
         {
             if(Engine.getColorPixel(x+(16/2)+dx, y+24+i, Engine.edges)==255){
                 y+=i;
@@ -111,4 +110,3 @@ public class Grumpy extends JComponent implements ActionListener
         return (double) y;
     }
 }
-
