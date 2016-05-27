@@ -8,7 +8,6 @@ public class GameLogic
 {
     public Mario s;
     public Coin c1;
-    public Box b1;
     public Grumpy g1;
     public static ArrayList<Coin> aC = new ArrayList<Coin>();
     public static ArrayList<Grumpy> gC = new ArrayList<Grumpy>();
@@ -20,13 +19,12 @@ public class GameLogic
         s = new Mario(0,0,1,10);
         createCoins();
         createGrumpy();
-        b1 = new Box(200,130);
         //g1 = new Grumpy(100,100);
     }
     
     public void createCoins()
     {
-        for(int i=25; i<550; i=i+25){
+        for(int i=25; i<560; i=i+25){
             aC.add(new Coin(i,10));
         }
     }

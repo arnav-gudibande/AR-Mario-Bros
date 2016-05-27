@@ -65,8 +65,11 @@ public class Mario extends JComponent implements ActionListener
         }
     }
 
+    
+    
     public void move() throws IOException {
-
+        if(y<=.5) dy = -.00000000001;
+        if(y>=390) dy = 20;
         
         if(!onLine){
             dy-=gravity;
@@ -78,6 +81,8 @@ public class Mario extends JComponent implements ActionListener
         
         
         repaint();
+        
+        
 
         if(Engine.getColorPixel(x+17,y+54,Engine.edges)!=255){
             onLine = false;
@@ -114,6 +119,15 @@ public class Mario extends JComponent implements ActionListener
                 GameLogic.aC.remove(i);
             }
         }
+        
+        for(int i=0; i<GameLogic.gC.size(); i++)
+        {
+            if(((x>=(GameLogic.gC.get(i).getXX())-15) && (x<=(GameLogic.gC.get(i).getXX())-5)) && ((y>=(GameLogic.gC.get(i).getYY())-35) && (y<=(GameLogic.gC.get(i).getYY())-25))) {
+                playGNoise();
+                Engine.t.stop();
+                Engine.g.stop();
+            }
+        }
 
     }
 
@@ -131,13 +145,13 @@ public class Mario extends JComponent implements ActionListener
     public void moveLeft()
     {
         //x-=5;
-        dx=-1.5;
+        if(x>=20) dx=-1.5;
     }
 
     public void moveRight()
     {
         //x+=5;
-        dx=1.5;
+        if(x<=630) dx=1.5;
 
     }
 
@@ -151,6 +165,20 @@ public class Mario extends JComponent implements ActionListener
             AudioInputStream audioInputStream =
                 AudioSystem.getAudioInputStream(
                     this.getClass().getResource("cnoise.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }
+        catch(Exception ex)
+        {
+        }
+    }
+    
+    public void playGNoise(){
+        try{
+            AudioInputStream audioInputStream =
+                AudioSystem.getAudioInputStream(
+                    this.getClass().getResource("die.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
